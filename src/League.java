@@ -1,7 +1,15 @@
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Collections;
+
 /**
  * Created by ac003588 on 9/12/2017.
  */
-public class League {
+
+// League object will take T objects, which will be of type team
+
+public class League<T extends Team> {
+
     /*
     each league will have:
     a list of teams
@@ -23,4 +31,25 @@ public class League {
 
 
      */
+
+    private ArrayList<T> teams = new ArrayList<>();
+
+    public boolean addTeam(T team) {
+        if(teams.add(team)) {
+            System.out.println("Team " + team.getName() + " added to League");
+            return true;
+        }
+        return false;
+    }
+    public ArrayList<T> displayTeams() {
+        ArrayList names = new ArrayList();
+        Collections.sort(teams, (t1, t2) -> t2.getWins() - t1.getWins());
+        for(Team t : teams ) {
+            names.add(t.getName());
+        }
+        return names;
+
+
+    }
+
 }
